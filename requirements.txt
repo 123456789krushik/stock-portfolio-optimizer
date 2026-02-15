@@ -1,9 +1,9 @@
-streamlit==1.29.0
+streamlit==1.32.2
 altair==4.2.2
-pandas==2.2.2
+pandas==2.1.4
 numpy==1.26.4
 matplotlib==3.8.4
 scipy==1.11.4
-yfinance==0.2.40
-pyarrow==14.0.2
-
+yfinance==0.2.37
+pyarrow==15.0.2
+setuptools>=68.0.0
