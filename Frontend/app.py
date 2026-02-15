@@ -119,6 +119,12 @@ if optimize_btn:
         st.error("Please enter at least 2 valid stock symbols.")
         st.stop()
 
+    # ✅ ADD THIS LINE HERE (FIX)
+    user_selected_stocks = [
+        s if s.endswith(".NS") else s + ".NS"
+        for s in user_selected_stocks
+    ]
+
     st.info(f"Selected Stocks: {user_selected_stocks}")
 
     # Fetch latest data
@@ -136,8 +142,8 @@ if optimize_btn:
     )
 
     if price_matrix.shape[1] < 2:
-        st.error("Insufficient data for selected stocks.")
-        st.stop()
+        st.error("Insufficient data for optimization.")
+
 
     # Returns & covariance
     daily_returns = price_matrix.pct_change().dropna()
