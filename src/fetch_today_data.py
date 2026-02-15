@@ -1,5 +1,3 @@
-
-'''
 import yfinance as yf
 import pandas as pd
 import os
@@ -39,33 +37,4 @@ def fetch_today_market_data(stocks, output_path):
 
     return df
 
-'''
 
-import yfinance as yf
-import pandas as pd
-
-def fetch_today_market_data(symbols, save_path):
-    data = []
-
-    for symbol in symbols:
-        # add .NS if not present
-        if not symbol.endswith(".NS"):
-            symbol = symbol + ".NS"
-
-        stock = yf.Ticker(symbol)
-        hist = stock.history(period="1d")
-
-        if not hist.empty:
-            price = hist["Close"].iloc[-1]
-            data.append({
-                "Symbol": symbol,
-                "Close": price
-            })
-
-    if not data:
-        raise ValueError("No valid stock data fetched. Please check symbols.")
-
-    df = pd.DataFrame(data)
-    df.to_csv(save_path, index=False)
-
-    return df
