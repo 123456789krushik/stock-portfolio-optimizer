@@ -118,13 +118,6 @@ if optimize_btn:
     if len(user_selected_stocks) < 2:
         st.error("Please enter at least 2 valid stock symbols.")
         st.stop()
-    
-    
-    user_selected_stocks = [
-    s.strip().upper()
-    for s in stock_input.split(",")
-    if s.strip()
-    ]
 
     st.info(f"Selected Stocks: {user_selected_stocks}")
 
@@ -143,8 +136,8 @@ if optimize_btn:
     )
 
     if price_matrix.shape[1] < 2:
-        st.error("Insufficient data for optimization.")
-
+        st.error("Insufficient data for selected stocks.")
+        st.stop()
 
     # Returns & covariance
     daily_returns = price_matrix.pct_change().dropna()

@@ -1,4 +1,4 @@
-'''
+
 import yfinance as yf
 import pandas as pd
 import os
@@ -37,56 +37,3 @@ def fetch_today_market_data(stocks, output_path):
         print("⚠️ Invalid / unavailable symbols skipped:", invalid_symbols)
 
     return df
-'''
-
-import yfinance as yf
-import pandas as pd
-import os
-
-def fetch_today_market_data(symbols, save_path):
-
-    # ensure directory exists
-    os.makedirs(os.path.dirname(save_path), exist_ok=True)
-
-    # add .NS suffix safely
-    symbols = [
-        s if s.endswith(".NS") else s + ".NS"
-        for s in symbols
-    ]
-
-    # download data (THIS METHOD WORKS ON STREAMLIT CLOUD)
-    df = yf.download(
-        tickers=symbols,
-        period="1y",
-        interval="1d",
-        group_by="ticker",
-        auto_adjust=True,
-        threads=False
-    )
-
-    if df.empty:
-        raise ValueError("No valid stock data fetched. Please check symbols.")
-
-    # convert to proper format
-    all_data = []
-
-    for symbol in symbols:
-        try:
-            temp = df[symbol].copy()
-            temp["Symbol"] = symbol
-            temp.reset_index(inplace=True)
-            all_data.append(temp)
-        except:
-            continue
-
-    if not all_data:
-        raise ValueError("No valid stock data fetched. Please check symbols.")
-
-    final_df = pd.concat(all_data, ignore_index=True)
-
-    final_df.to_csv(save_path, index=False)
-
-    return final_df
-
-
-
