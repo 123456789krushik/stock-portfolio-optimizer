@@ -15,7 +15,7 @@ from src.fetch_today_data import fetch_today_market_data
 from src.data_processing import load_and_clean_data, pivot_close_prices
 from src.optimization import monte_carlo_simulation
 
-# =========================
+# ========================
 # SIMPLE PREMIUM STYLING
 # =========================
 st.markdown("""
