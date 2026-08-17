@@ -171,6 +171,14 @@ if optimize_btn:
         file_name="optimal_portfolio.csv",
         mime="text/csv"
     )
+
+
+@app.route("/health", methods=["GET"])
+def health():
+    return jsonify(
+        status="ok",
+        message="Backend is running"
+    ), 200
     
     
 
